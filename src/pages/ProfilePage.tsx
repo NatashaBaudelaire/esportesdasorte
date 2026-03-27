@@ -400,7 +400,7 @@ const ProfilePage = () => {
               <Shield size={20} className="text-blue-600" />
               <div className="text-left">
                 <p className="font-display text-sm font-bold text-blue-900">Verificação KYC</p>
-                <p className="text-xs font-body text-blue-700">Necessário para acesso</p>
+                <p className="text-xs font-body text-blue-700">Desbloqueie PIX e saques</p>
               </div>
             </div>
             <ChevronRight size={16} className="text-blue-600" />
