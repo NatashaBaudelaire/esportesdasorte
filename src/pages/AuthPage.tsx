@@ -1407,7 +1407,8 @@ const AuthPage = () => {
                         };
                         setAuthError(errMap[error] || error);
                       } else {
-                        setStep('kyc');
+                        // Skip KYC during signup and go directly to success
+                        setStep('success');
                       }
                     }
                   }}
