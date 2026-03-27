@@ -1,0 +1,346 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  [data-theme="dark"] {
+    /* ── Neon Cinético Palette ── */
+    --background: 220 31% 6%;          /* #0b0e14 */
+    --foreground: 230 33% 95%;         /* #ecedf6 */
+
+    --card: 220 18% 11%;              /* #161a21 surface-container */
+    --card-foreground: 230 33% 95%;
+
+    --popover: 220 16% 13%;           /* #1c2028 surface-container-high */
+    --popover-foreground: 230 33% 95%;
+
+    --primary: 150 78% 56%;           /* #38E67D neon green */
+    --primary-foreground: 220 31% 6%;
+
+    --secondary: 150 95% 65%;         /* #52fa8e bright green */
+    --secondary-foreground: 220 31% 6%;
+
+    --accent: 224 97% 30%;            /* #023397 electric blue */
+    --accent-foreground: 230 33% 95%;
+
+    --muted: 220 13% 18%;             /* #282c36 surface-bright */
+    --muted-foreground: 220 5% 68%;   /* #a9abb3 on-surface-variant */
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 230 33% 95%;
+
+    --border: 222 6% 29%;             /* #45484f outline-variant */
+    --input: 220 18% 11%;
+    --ring: 150 78% 56%;
+
+    --radius: 0.75rem;
+
+    /* ── Surface Hierarchy (Camadas) ── */
+    --surface-base: 220 31% 6%;       /* #0b0e14 */
+    --surface-section: 220 18% 11%;   /* #161a21 */
+    --surface-card: 220 16% 13%;      /* #1c2028 */
+    --surface-interactive: 220 13% 18%; /* #282c36 */
+
+    /* ── Sidebar ── */
+    --sidebar-background: 220 18% 11%;
+    --sidebar-foreground: 230 33% 95%;
+    --sidebar-primary: 150 78% 56%;
+    --sidebar-primary-foreground: 220 31% 6%;
+    --sidebar-accent: 220 13% 18%;
+    --sidebar-accent-foreground: 230 33% 95%;
+    --sidebar-border: 222 6% 29%;
+    --sidebar-ring: 150 78% 56%;
+
+    /* ── Glassmorphism ── */
+    --glass-bg: 220 18% 11% / 0.75;
+    --glass-blur: 16px;
+
+    /* ── Neon Glow Tokens ── */
+    --glow-primary: 150 78% 56%;
+    --glow-accent: 225 100% 79%;      /* #92aaff surface-tint */
+
+    font-family: 'Inter', sans-serif;
+  }
+
+  [data-theme="light"] {
+    --background: 220 20% 96%;
+    --foreground: 220 31% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 31% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 31% 10%;
+
+    --primary: 150 78% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 150 60% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 224 97% 30%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 220 10% 90%;
+    --muted-foreground: 220 5% 40%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 10% 85%;
+    --input: 220 10% 85%;
+    --ring: 150 78% 40%;
+
+    --surface-base: 220 20% 96%;
+    --surface-section: 220 15% 94%;
+    --surface-card: 0 0% 100%;
+    --surface-interactive: 220 10% 90%;
+
+    --glass-bg: 0 0% 100% / 0.85;
+    --glass-blur: 16px;
+
+    --glow-primary: 150 78% 40%;
+    --glow-accent: 225 80% 60%;
+  }
+
+  [data-theme="contrast"] {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 220 20% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 220 20% 5%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 150 90% 60%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 150 95% 65%;
+    --secondary-foreground: 0 0% 0%;
+
+    --accent: 224 100% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 220 10% 12%;
+    --muted-foreground: 220 5% 65%;
+
+    --destructive: 0 100% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 5% 30%;
+    --input: 220 5% 30%;
+    --ring: 150 90% 60%;
+
+    --surface-base: 0 0% 0%;
+    --surface-section: 220 20% 4%;
+    --surface-card: 220 20% 5%;
+    --surface-interactive: 220 10% 12%;
+
+    --glass-bg: 220 20% 5% / 0.9;
+    --glass-blur: 20px;
+
+    --glow-primary: 150 90% 60%;
+    --glow-accent: 225 100% 79%;
+  }
+
+  /* Font size scaling */
+  [data-fontsize="P"] { font-size: 14px; }
+  [data-fontsize="M"] { font-size: 16px; }
+  [data-fontsize="G"] { font-size: 18px; }
+  [data-fontsize="GG"] { font-size: 20px; }
+
+  /* Daltonism filters */
+  [data-daltonism="deuteranopia"] { filter: url('#deuteranopia'); }
+  [data-daltonism="protanopia"] { filter: url('#protanopia'); }
+  [data-daltonism="tritanopia"] { filter: url('#tritanopia'); }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    border-style: none;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── Glassmorphism ── */
+  .glass {
+    background: hsla(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  /* ── Neon Cinético Gradients ── */
+  .text-gradient-neon {
+    background: linear-gradient(135deg, hsl(150, 78%, 56%), hsl(150, 95%, 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(150, 78%, 56%), hsl(224, 97%, 30%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-cta {
+    background: linear-gradient(135deg, hsl(224, 97%, 30%), hsl(150, 78%, 56%));
+  }
+
+  .bg-gradient-metallic {
+    background: linear-gradient(135deg, hsl(225, 100%, 79%), hsl(225, 100%, 75%));
+  }
+
+  /* ── Neon Glow ── */
+  .glow-neon {
+    box-shadow: 0 0 12px hsl(var(--glow-primary) / 0.25),
+                0 0 40px hsl(var(--glow-primary) / 0.08);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 24px hsl(var(--glow-accent) / 0.08);
+  }
+
+  /* ── Ambient Shadow ── */
+  .shadow-ambient {
+    box-shadow: 0 8px 40px hsl(var(--glow-accent) / 0.08);
+  }
+
+  /* ── Ghost Border (max 15% opacity) ── */
+  .border-ghost {
+    box-shadow: inset 0 0 0 1px hsl(var(--border) / 0.15);
+  }
+
+  /* Dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* ── Rich Animations ── */
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 8px hsl(var(--glow-primary) / 0.3); }
+    50% { box-shadow: 0 0 20px hsl(var(--glow-primary) / 0.6), 0 0 40px hsl(var(--glow-primary) / 0.2); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes slide-shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes count-up {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--glow-primary) / 0.08) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.04),
+      transparent
+    );
+    animation: slide-shine 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .animate-count-up {
+    animation: count-up 0.5s ease-out both;
+  }
+}
