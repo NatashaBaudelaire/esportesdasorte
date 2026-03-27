@@ -325,7 +325,7 @@ const ResponsibleGamingPage = () => {
           </a>
 
           <a
-            href="https://www.jogadoresanonimos.org.br"
+            href="https://jogadoresanonimos.com.br"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full flex items-center justify-between p-3 rounded-lg bg-surface-interactive hover:bg-surface-interactive/80 transition-colors"
