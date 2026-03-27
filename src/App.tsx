@@ -18,7 +18,6 @@ import ProfilePage from "@/pages/ProfilePage";
 import AuthPage from "@/pages/AuthPage";
 import EventDetailPage from "@/pages/EventDetailPage";
 import BolaoPage from "@/pages/BolaoPage";
-import PlansPage from "@/pages/PlansPage";
 import SettingsPage from "@/pages/SettingsPage";
 import CasinoPage from "@/pages/CasinoPage";
 import CrashPage from "@/pages/CrashPage";
@@ -72,7 +71,6 @@ const AppLayout = () => {
           <Route path="/perfil" element={<ProfilePage />} />
           <Route path="/evento/:id" element={<EventDetailPage />} />
           <Route path="/bolao" element={<BolaoPage />} />
-          <Route path="/planos" element={<PlansPage />} />
           <Route path="/configuracoes" element={<SettingsPage />} />
           <Route path="/historico" element={<BetHistoryPage />} />
           <Route path="/desempenho" element={<PerformancePage />} />

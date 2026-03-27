@@ -23,13 +23,17 @@ create index if not exists idx_kyc_attempt_audit_created_at on public.kyc_attemp
 
 alter table public.kyc_attempt_audit enable row level security;
 
-create policy if not exists "Users can view own kyc audit"
+drop policy if exists "Users can view own kyc audit" on public.kyc_attempt_audit;
+
+create policy "Users can view own kyc audit"
 on public.kyc_attempt_audit
 for select
 to authenticated
 using (auth.uid() = user_id);
 
-create policy if not exists "Users can insert own kyc audit"
+drop policy if exists "Users can insert own kyc audit" on public.kyc_attempt_audit;
+
+create policy "Users can insert own kyc audit"
 on public.kyc_attempt_audit
 for insert
 to authenticated

@@ -226,28 +226,6 @@ const SettingsPage = () => {
           </button>
         </section>
 
-        {/* Plans & Streaming */}
-        <section className="space-y-3">
-          <h2 className="font-display text-sm font-bold flex items-center gap-2">
-            <Crown size={16} className="text-primary" aria-hidden="true" /> Planos
-          </h2>
-
-          <button
-            onClick={() => navigate('/planos')}
-            aria-label="Ver planos de assinatura e plataformas de streaming"
-            className="w-full bg-surface-card rounded-xl p-4 flex items-center justify-between min-h-[52px] hover:bg-surface-interactive transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
-          >
-            <div className="flex items-center gap-3">
-              <Crown size={18} className="text-primary" aria-hidden="true" />
-              <div className="text-left">
-                <p className="text-sm font-body font-medium text-foreground">Planos & Assinatura</p>
-                <p className="text-[0.65rem] text-muted-foreground font-body">Streamings e plataformas disponíveis</p>
-              </div>
-            </div>
-            <ChevronRight size={16} className="text-muted-foreground" aria-hidden="true" />
-          </button>
-        </section>
-
         <section className="space-y-3">
           <h2 className="font-display text-sm font-bold flex items-center gap-2">
             <BadgeCheck size={16} className="text-primary" aria-hidden="true" /> Conformidade

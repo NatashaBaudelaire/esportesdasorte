@@ -60,7 +60,6 @@ const menuItems = [
   { icon: History, label: 'Histórico de Apostas', route: '/historico' },
   { icon: TrendingUp, label: 'Relatório de Desempenho', route: '/desempenho' },
   { icon: Trophy, label: 'Bolão', route: '/bolao' },
-  { icon: Award, label: 'Plano Premium', route: '/planos' },
   { icon: CreditCard, label: 'Carteira', route: '/carteira' },
   { icon: Shield, label: 'Jogo Responsável', route: '/jogo-responsavel' },
   { icon: Settings, label: 'Configurações', route: '/configuracoes' },
