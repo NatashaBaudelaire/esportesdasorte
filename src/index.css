@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +7,10 @@
 @layer base {
   :root,
   [data-theme="dark"] {
+    --brand-blue: #023397;
+    --brand-green: #38E67D;
+    /* Print references: CMYK Blue 100/84/8/0, Green 62/0/69/0 */
+
     /* ── Neon Cinético Palette ── */
     --background: 220 31% 6%;          /* #0b0e14 */
     --foreground: 230 33% 95%;         /* #ecedf6 */
@@ -64,6 +70,9 @@
   }
 
   [data-theme="light"] {
+    --brand-blue: #023397;
+    --brand-green: #38E67D;
+
     --background: 220 20% 96%;
     --foreground: 220 31% 10%;
 
@@ -73,10 +82,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 31% 10%;
 
-    --primary: 150 78% 40%;
+    --primary: 150 78% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 150 60% 45%;
+    --secondary: 150 95% 65%;
     --secondary-foreground: 0 0% 100%;
 
     --accent: 224 97% 30%;
@@ -90,7 +99,7 @@
 
     --border: 220 10% 85%;
     --input: 220 10% 85%;
-    --ring: 150 78% 40%;
+    --ring: 150 78% 56%;
 
     --surface-base: 220 20% 96%;
     --surface-section: 220 15% 94%;
@@ -100,7 +109,7 @@
     --glass-bg: 0 0% 100% / 0.85;
     --glass-blur: 16px;
 
-    --glow-primary: 150 78% 40%;
+    --glow-primary: 150 78% 56%;
     --glow-accent: 225 80% 60%;
   }
 
@@ -165,18 +174,61 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  [role="button"] {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
   }
 }
 
 @layer utilities {
   .font-display {
     font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+  }
+
+  .brand-logo-theme {
+    display: block;
   }
 
   .font-body {
     font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  .font-body-semibold {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .brand-title {
+    letter-spacing: 0.015em;
+    font-weight: 700;
+  }
+
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #023397 0%, #38E67D 100%);
+  }
+
+  .text-brand-blue {
+    color: #023397;
+  }
+
+  .text-brand-green {
+    color: #38E67D;
+  }
+
+  .icon-flat {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   /* ── Glassmorphism ── */

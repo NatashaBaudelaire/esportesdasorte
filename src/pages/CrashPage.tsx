@@ -106,7 +106,7 @@ const CrashPage = () => {
                   <div className="p-3 space-y-2">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <p className="text-sm font-display font-extrabold text-foreground">{game.title}</p>
+                        <p className="text-sm font-display brand-title font-extrabold text-foreground">{game.title}</p>
                         <p className="text-[11px] font-body text-muted-foreground">{game.subtitle}</p>
                       </div>
                       {game.badge && (

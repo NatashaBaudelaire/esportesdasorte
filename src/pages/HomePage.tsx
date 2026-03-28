@@ -9,10 +9,10 @@ import bannerLiga from '@/assets/banner-liga.jpg';
 import MatchCard from '@/components/MatchCard';
 import SportFilter from '@/components/SportFilter';
 import VisitorBanner from '@/components/VisitorBanner';
-import { liveMatches, boostedMatches, upcomingMatches, popularMultiples, playerProps, heroBanners, competitions, specials, oddsByCategory } from '@/data/mockData';
+import { liveMatches, boostedMatches, upcomingMatches, popularMultiples, heroBanners, competitions, specials, oddsByCategory } from '@/data/mockData';
 import { useBetSlipStore } from '@/store/betSlipStore';
 import { useAuthStore } from '@/store/authStore';
-import { Flame, ChevronRight, Trophy, Gift, Zap, User, Calendar, Target, Scale, CreditCard, CornerDownRight, Award, Star, LayoutGrid } from 'lucide-react';
+import { Flame, ChevronRight, Trophy, Gift, Zap, Calendar, Target, Scale, CreditCard, CornerDownRight, Award, Star, LayoutGrid } from 'lucide-react';
 import { PageTransition, SectionReveal, staggerContainer, staggerItem } from '@/components/animations';
 import QuickAccessRow from '@/components/home/QuickAccessRow';
 import BettingTipsSection from '@/components/home/BettingTipsSection';
@@ -33,7 +33,7 @@ const SectionTitle = ({ children, icon, action, actionRoute }: { children: React
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
     >
-      <h2 className="font-display text-lg font-bold flex items-center gap-2">
+      <h2 className="font-display brand-title text-lg font-bold flex items-center gap-2">
         {icon}
         {children}
       </h2>
@@ -103,7 +103,7 @@ const HeroCarousel = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="font-display text-2xl font-extrabold leading-tight mt-1"
+                className="font-display brand-title text-2xl font-extrabold leading-tight mt-1"
               >
                 {heroBanners[current].title}
               </motion.h1>
@@ -148,92 +148,6 @@ const HeroCarousel = () => {
             className={`h-2 rounded-full transition-all duration-300 ${i === current ? 'bg-primary w-5' : 'bg-foreground/30 w-2'}`}
           />
         ))}
-      </div>
-    </div>
-  );
-};
-
-/* ───────── Player Props Carousel ───────── */
-const cardGradients = [
-  'from-[hsl(345,40%,25%)] to-[hsl(345,50%,15%)]',
-  'from-[hsl(220,50%,30%)] to-[hsl(220,60%,18%)]',
-  'from-[hsl(280,40%,25%)] to-[hsl(280,50%,15%)]',
-  'from-[hsl(30,50%,25%)] to-[hsl(30,60%,15%)]',
-  'from-[hsl(160,40%,22%)] to-[hsl(160,50%,12%)]',
-];
-
-const PlayerPropsCarousel = () => {
-  const addBet = useBetSlipStore((s) => s.addBet);
-  const pageSize = 80;
-  const [visibleCount, setVisibleCount] = useState(pageSize);
-  const carouselPlayers = playerProps.slice(0, visibleCount);
-  const hasMorePlayers = visibleCount < playerProps.length;
-
-  return (
-    <div className="px-4 pb-1 space-y-2">
-      <div className="flex gap-3 overflow-x-auto no-scrollbar">
-        {carouselPlayers.map((p, i) => (
-          <motion.button
-            key={p.id}
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ y: -4 }}
-            onClick={() =>
-              addBet({ id: p.id, match: p.team, market: p.market, selection: p.player, odds: p.odds })
-            }
-            className={`flex-shrink-0 w-[130px] rounded-xl overflow-hidden bg-gradient-to-b ${cardGradients[i % cardGradients.length]} relative card-shine`}
-          >
-            {/* Card top - number & position */}
-            <div className="relative pt-2 px-3">
-              <div className="flex justify-between items-start">
-                <div className="text-left">
-                  <p className="font-display text-2xl font-extrabold text-primary leading-none">{p.number}</p>
-                  <p className="text-[0.55rem] font-display font-bold text-foreground/60 uppercase">{p.position}</p>
-                </div>
-                <p className="text-[0.5rem] font-body text-foreground/40 uppercase text-right leading-tight mt-1">{p.team}</p>
-              </div>
-            </div>
-
-            {/* Player silhouette */}
-            <div className="flex items-center justify-center py-3">
-              <div className="w-16 h-16 rounded-full bg-foreground/5 flex items-center justify-center">
-                <User size={28} className="text-foreground/20" />
-              </div>
-            </div>
-
-            {/* Player name bar */}
-            <div className="bg-background/40 px-2 py-1.5">
-              <p className="font-display text-[0.65rem] font-bold text-foreground truncate text-center uppercase tracking-wide">
-                {p.player}
-              </p>
-            </div>
-
-            {/* Market + Odds */}
-            <div className="px-2 pt-1.5 pb-2 space-y-1.5">
-              <p className="text-[0.5rem] font-body text-foreground/50 text-center leading-tight">{p.market}</p>
-              <div className="bg-primary/15 rounded-lg py-1.5 text-center">
-                <span className="font-display text-primary font-extrabold text-base">{p.odds.toFixed(2)}</span>
-              </div>
-            </div>
-
-            {/* Shield border effect */}
-            <div className="absolute inset-0 rounded-xl border border-foreground/10 pointer-events-none" />
-          </motion.button>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-between px-1">
-        <p className="text-[0.65rem] font-body text-muted-foreground">
-          Mostrando {carouselPlayers.length} de {playerProps.length} jogadores
-        </p>
-        {hasMorePlayers && (
-          <button
-            type="button"
-            onClick={() => setVisibleCount((prev) => Math.min(prev + pageSize, playerProps.length))}
-            className="text-[0.65rem] font-display font-bold bg-surface-card text-primary border border-border/60 px-3 py-1.5 rounded-full min-h-[32px]"
-          >
-            Carregar mais
-          </button>
-        )}
       </div>
     </div>
   );
@@ -412,17 +326,6 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-      </section>
-      </SectionReveal>
-
-      <SectionReveal delay={0.1}>
-      <section>
-        <div className="px-4">
-          <SectionTitle icon={<User size={20} className="text-primary" />}>
-            Player Props
-          </SectionTitle>
-        </div>
-        <PlayerPropsCarousel />
       </section>
       </SectionReveal>
 
