@@ -76,7 +76,7 @@ const SportFilter = ({ onFilterChange }: SportFilterProps) => {
           onClick={() => setExpanded(true)}
           className="w-full flex items-center justify-center gap-1 text-xs font-body font-semibold text-primary py-2 min-h-[44px]"
         >
-          Ver todos os esportes ({sports.length})
+          Mostrar esportes ({sports.length})
           <ChevronRight size={14} />
         </button>
       )}

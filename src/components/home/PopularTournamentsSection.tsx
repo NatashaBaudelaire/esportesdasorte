@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Trophy, ChevronRight } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { SectionReveal } from '@/components/animations';
 
@@ -27,9 +27,6 @@ const PopularTournamentsSection = () => {
             <Trophy size={20} className="text-primary" />
             Torneios Populares
           </h2>
-          <button onClick={() => navigate('/esportes')} className="text-xs text-primary font-body font-semibold flex items-center gap-0.5 min-h-[44px]">
-            Ver todos <ChevronRight size={14} />
-          </button>
         </motion.div>
 
         <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1">
