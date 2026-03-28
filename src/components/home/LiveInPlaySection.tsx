@@ -179,11 +179,15 @@ const LiveInPlaySection = () => {
 
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-sm font-bold">{m.home}</span>
+                  <span className="font-display text-sm font-bold flex items-center gap-1.5">
+                    {m.home}
+                  </span>
                   <span className="font-display text-sm font-bold">{m.homeScore}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-body text-sm text-foreground/80">{m.away}</span>
+                  <span className="font-body text-sm text-foreground/80 flex items-center gap-1.5">
+                    {m.away}
+                  </span>
                   <span className="font-body text-sm text-foreground/80">{m.awayScore}</span>
                 </div>
                 <div className="h-0.5 rounded-full bg-secondary/30 mt-1">

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Gates of Olympus cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1205"/>
+      <stop offset="100%" stop-color="#261a08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1080" cy="130" r="240" fill="#f59e0b" fill-opacity="0.25"/>
+  <rect x="850" y="250" width="120" height="280" rx="14" fill="#3a2a0d" stroke="#f59e0b" stroke-width="5"/>
+  <rect x="1000" y="250" width="120" height="280" rx="14" fill="#3a2a0d" stroke="#f59e0b" stroke-width="5"/>
+  <rect x="822" y="222" width="326" height="42" rx="10" fill="#4b3511" stroke="#f59e0b" stroke-width="4"/>
+  <rect x="84" y="86" width="190" height="56" rx="28" fill="#2a1d09" stroke="#f59e0b" stroke-width="3"/>
+  <text x="118" y="123" fill="#f59e0b" font-family="Verdana, Arial, sans-serif" font-size="27" font-weight="700">SLOTS</text>
+  <text x="84" y="548" fill="#f5ede0" font-family="Verdana, Arial, sans-serif" font-size="82" font-weight="700">GATES OF</text>
+  <text x="84" y="630" fill="#f5ede0" font-family="Verdana, Arial, sans-serif" font-size="82" font-weight="700">OLYMPUS</text>
+</svg>

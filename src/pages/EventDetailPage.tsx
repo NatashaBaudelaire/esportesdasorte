@@ -1,56 +1,21 @@
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Video, Clock, ChevronDown, ChevronUp, Shield, Radio } from 'lucide-react';
+import { ArrowLeft, Video, Clock, ChevronDown, ChevronUp, Radio, Shield } from 'lucide-react';
 import OddsChip from '@/components/OddsChip';
 import LiveBadge from '@/components/LiveBadge';
 import { liveMatches, boostedMatches, upcomingMatches } from '@/data/mockData';
 
-const teamFlags: Record<string, string> = {
-  'Flamengo': 'https://flagcdn.com/w80/br.png',
-  'Palmeiras': 'https://flagcdn.com/w80/br.png',
-  'Corinthians': 'https://flagcdn.com/w80/br.png',
-  'São Paulo': 'https://flagcdn.com/w80/br.png',
-  'Real Madrid': 'https://flagcdn.com/w80/es.png',
-  'Barcelona': 'https://flagcdn.com/w80/es.png',
-  'Juventus': 'https://flagcdn.com/w80/it.png',
-  'Inter Milan': 'https://flagcdn.com/w80/it.png',
-  'Liverpool': 'https://flagcdn.com/w80/gb-eng.png',
-  'Man City': 'https://flagcdn.com/w80/gb-eng.png',
-  'PSG': 'https://flagcdn.com/w80/fr.png',
-  'Bayern Munich': 'https://flagcdn.com/w80/de.png',
-  'Athletico-PR': 'https://flagcdn.com/w80/br.png',
-  'Coritiba': 'https://flagcdn.com/w80/br.png',
-  'Grêmio': 'https://flagcdn.com/w80/br.png',
-  'Internacional': 'https://flagcdn.com/w80/br.png',
-  'Atlético-MG': 'https://flagcdn.com/w80/br.png',
-  'Cruzeiro': 'https://flagcdn.com/w80/br.png',
-  'Fluminense': 'https://flagcdn.com/w80/br.png',
-  'Botafogo': 'https://flagcdn.com/w80/br.png',
-  'Santos': 'https://flagcdn.com/w80/br.png',
-  'Vasco': 'https://flagcdn.com/w80/br.png',
-  'Brasil': 'https://flagcdn.com/w80/br.png',
-  'Argentina': 'https://flagcdn.com/w80/ar.png',
-  'França': 'https://flagcdn.com/w80/fr.png',
-  'Arsenal': 'https://flagcdn.com/w80/gb-eng.png',
-  'Chelsea': 'https://flagcdn.com/w80/gb-eng.png',
-  'Imperatriz': 'https://flagcdn.com/w80/br.png',
-  'Retrô': 'https://flagcdn.com/w80/br.png',
-  'Rio Branco-ES': 'https://flagcdn.com/w80/br.png',
-  'Vila Nova': 'https://flagcdn.com/w80/br.png',
-  'Lakers': 'https://flagcdn.com/w80/us.png',
-  'Warriors': 'https://flagcdn.com/w80/us.png',
-};
-
 const TeamBadge = ({ team }: { team: string }) => {
-  const flag = teamFlags[team];
+  const initials = team
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
+
   return (
     <div className="w-12 h-12 rounded-full bg-surface-interactive flex items-center justify-center overflow-hidden">
-      {flag ? (
-        <img src={flag} alt={team} className="w-8 h-8 object-cover rounded-sm" />
-      ) : (
-        <Shield size={24} className="text-muted-foreground" />
-      )}
+      <span className="font-display text-xs font-bold text-foreground/70">{initials || 'TM'}</span>
     </div>
   );
 };

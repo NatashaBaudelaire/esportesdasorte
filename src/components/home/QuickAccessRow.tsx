@@ -9,7 +9,6 @@ const quickItems = [
   { id: 'crash', label: 'Crash', icon: Zap, route: '/crash', color: 'text-primary' },
   { id: 'cassino', label: 'Cassino', icon: Dices, route: '/cassino', color: 'text-secondary' },
   { id: 'bolao', label: 'Bolão', icon: Ticket, route: '/bolao', color: 'text-primary' },
-  { id: 'superodds', label: 'Super Odds', icon: Flame, route: '/', color: 'text-secondary' },
 ];
 
 const QuickAccessRow = () => {

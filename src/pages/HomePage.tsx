@@ -280,7 +280,12 @@ const HomePage = () => {
               {/* Match header */}
               <div className="px-4 pt-4 pb-2 text-center space-y-1">
                 <p className="text-[0.65rem] font-body text-muted-foreground">{match.league}</p>
-                <p className="font-display text-base font-bold">{match.homeTeam} — {match.awayTeam}</p>
+                <p className="font-display text-base font-bold flex items-center justify-center gap-2">
+                  <span>{match.homeTeam}</span>
+                  <span>—</span>
+                  <span>{match.awayTeam}</span>
+                </p>
+                <p className="text-xs font-display font-bold text-primary">{match.homeScore ?? 0} : {match.awayScore ?? 0}</p>
                 <p className="text-xs font-body text-muted-foreground">{match.time}</p>
               </div>
 
@@ -325,7 +330,7 @@ const HomePage = () => {
                     {match.originalOddsHome?.toFixed(2)}
                   </span>
                   <span className="text-primary font-display text-lg font-extrabold">
-                    ⚡ {match.oddsHome.toFixed(2)}
+                    {match.oddsHome.toFixed(2)}
                   </span>
                 </motion.button>
               </div>
@@ -415,11 +420,16 @@ const HomePage = () => {
           {upcomingMatches.map((m, i) => (
             <div key={m.id} className={`grid grid-cols-[1fr_auto_auto_auto] gap-x-2 items-center px-4 py-3 ${i > 0 ? 'bg-surface-section' : ''}`}>
               <div>
-                <p className="text-sm font-body font-semibold">{m.homeTeam} vs {m.awayTeam}</p>
+                <p className="text-sm font-body font-semibold flex items-center gap-2 flex-wrap">
+                  <span>{m.homeTeam}</span>
+                  <span>vs</span>
+                  <span>{m.awayTeam}</span>
+                </p>
                 <div className="flex items-center gap-2 mt-0.5">
                   <span className="text-[0.6rem] font-body text-muted-foreground">{m.league}</span>
                   <span className="text-[0.6rem] font-body text-muted-foreground">{m.time}</span>
                 </div>
+                <p className="text-[0.65rem] font-display font-bold text-primary mt-1">{m.homeScore ?? 0} : {m.awayScore ?? 0}</p>
               </div>
               {[m.oddsHome, m.oddsDraw, m.oddsAway].map((odd, j) => (
                 <motion.button

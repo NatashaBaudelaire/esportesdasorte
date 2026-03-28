@@ -8,6 +8,7 @@ import {
   Diamond, Target, Disc, Bike, Car, Waves, PersonStanding,
   Wind, Gem, Glasses, Zap, Globe, type LucideIcon
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useBetSlipStore } from '@/store/betSlipStore';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -218,6 +219,7 @@ const formatTimeAgo = (dateISO: string) => {
 };
 
 const EsportesPage = () => {
+  const navigate = useNavigate();
   const [selectedSport, setSelectedSport] = useState(sportsList[0]);
   const [sportPickerOpen, setSportPickerOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('calendario');
@@ -559,7 +561,16 @@ const EsportesPage = () => {
                 <Trophy size={18} className="text-primary" />
                 <p className="font-display text-sm font-extrabold uppercase text-foreground">Apostas da Comunidade</p>
               </div>
-              <p className="text-[0.65rem] font-body text-muted-foreground">{socialBets.length} compartilhadas</p>
+              <div className="flex items-center gap-2">
+                <p className="text-[0.65rem] font-body text-muted-foreground">{socialBets.length} compartilhadas</p>
+                <button
+                  type="button"
+                  onClick={() => navigate('/chat')}
+                  className="text-[0.65rem] font-display font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full"
+                >
+                  Abrir Social
+                </button>
+              </div>
             </div>
 
             {socialLoading && (

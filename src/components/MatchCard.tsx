@@ -28,6 +28,8 @@ const MatchCard = ({
 }: MatchCardProps) => {
   const navigate = useNavigate();
   const matchName = `${homeTeam} vs ${awayTeam}`;
+  const displayHomeScore = homeScore ?? 0;
+  const displayAwayScore = awayScore ?? 0;
 
   return (
     <motion.div
@@ -47,16 +49,16 @@ const MatchCard = ({
         {/* Match info */}
         <div className="flex-1 space-y-1">
           <div className="flex items-center justify-between">
-            <span className="font-body font-semibold text-sm">{homeTeam}</span>
-            {isLive && homeScore !== undefined && (
-              <span className="font-display text-lg font-bold text-primary">{homeScore}</span>
-            )}
+            <span className="font-body font-semibold text-sm flex items-center gap-1.5">
+              {homeTeam}
+            </span>
+            <span className={`font-display text-lg font-bold ${isLive ? 'text-primary' : 'text-foreground/75'}`}>{displayHomeScore}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="font-body font-semibold text-sm">{awayTeam}</span>
-            {isLive && awayScore !== undefined && (
-              <span className="font-display text-lg font-bold text-primary">{awayScore}</span>
-            )}
+            <span className="font-body font-semibold text-sm flex items-center gap-1.5">
+              {awayTeam}
+            </span>
+            <span className={`font-display text-lg font-bold ${isLive ? 'text-primary' : 'text-foreground/75'}`}>{displayAwayScore}</span>
           </div>
         </div>
 

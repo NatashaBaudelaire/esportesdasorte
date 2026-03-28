@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Send, Users, TrendingUp, MessageCircle, Crown, Flame, ThumbsUp,
@@ -44,6 +44,22 @@ interface Comment {
   text: string;
   timeAgo: string;
   likes: number;
+}
+
+interface SocialUserProfile {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string;
+  level: string;
+  verified: boolean;
+  followers: number;
+  following: number;
+  totalBets: number;
+  hitRate: number;
+  profit: number;
+  winStreak: number;
+  recentHistory: Array<'green' | 'red' | 'pending'>;
 }
 
 type Tab = 'popular' | 'apostas' | 'criar' | 'recentes' | 'odds100' | 'gols' | 'jogadores';
@@ -195,6 +211,73 @@ const formatNumber = (n: number) => {
   return n.toString();
 };
 
+const hashString = (value: string) => {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash << 5) - hash + value.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+};
+
+const buildProfilesFromPosts = (posts: FeedPost[]): SocialUserProfile[] => {
+  const grouped = new Map<string, FeedPost[]>();
+
+  posts.forEach((post) => {
+    const key = post.user.username;
+    const list = grouped.get(key) || [];
+    list.push(post);
+    grouped.set(key, list);
+  });
+
+  return Array.from(grouped.entries()).map(([username, userPosts]) => {
+    const sample = userPosts[0];
+    const settled = userPosts.filter((post) => post.bet.result === 'green' || post.bet.result === 'red');
+    const greens = settled.filter((post) => post.bet.result === 'green').length;
+    const reds = settled.filter((post) => post.bet.result === 'red').length;
+    const hitRate = settled.length > 0 ? Math.round((greens / settled.length) * 100) : 0;
+
+    const profit = settled.reduce((acc, post) => {
+      const stake = post.bet.stake || 0;
+      if (post.bet.result === 'green') {
+        return acc + stake * (post.bet.odd - 1);
+      }
+      return acc - stake;
+    }, 0);
+
+    const hash = hashString(username);
+    const followers = 120 + (hash % 9500) + userPosts.reduce((acc, p) => acc + p.likes, 0);
+    const following = 30 + (hash % 900);
+
+    let currentStreak = 0;
+    let bestStreak = 0;
+    userPosts.forEach((post) => {
+      if (post.bet.result === 'green') {
+        currentStreak += 1;
+        bestStreak = Math.max(bestStreak, currentStreak);
+      } else if (post.bet.result === 'red') {
+        currentStreak = 0;
+      }
+    });
+
+    return {
+      id: username,
+      name: sample.user.name,
+      username,
+      avatar: sample.user.avatar,
+      level: sample.user.level,
+      verified: sample.user.verified,
+      followers,
+      following,
+      totalBets: userPosts.length,
+      hitRate,
+      profit,
+      winStreak: bestStreak,
+      recentHistory: userPosts.slice(0, 5).map((post) => post.bet.result || 'pending'),
+    };
+  });
+};
+
 const ChatPage = () => {
   const { isLoggedIn, user } = useAuthStore();
   const navigate = useNavigate();
@@ -207,6 +290,9 @@ const ChatPage = () => {
   const [realBets, setRealBets] = useState<FeedPost[]>([]);
   const [loadingReal, setLoadingReal] = useState(true);
   const [dbComments, setDbComments] = useState<Map<string, Comment[]>>(new Map());
+  const [socialQuery, setSocialQuery] = useState('');
+  const [followedUsers, setFollowedUsers] = useState<Set<string>>(new Set());
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
 
   // Fetch comments from DB
   const fetchComments = async (betIds: string[]) => {
@@ -365,6 +451,59 @@ const ChatPage = () => {
   };
 
   const allPosts = [...realBets, ...feedPosts];
+
+  const userProfiles = useMemo(() => buildProfilesFromPosts(allPosts), [allPosts]);
+
+  const filteredProfiles = useMemo(() => {
+    const q = socialQuery.trim().toLowerCase();
+    if (!q) return userProfiles;
+    return userProfiles.filter((profile) =>
+      profile.name.toLowerCase().includes(q) || profile.username.toLowerCase().includes(q)
+    );
+  }, [socialQuery, userProfiles]);
+
+  const selectedProfile = useMemo(
+    () => filteredProfiles.find((profile) => profile.id === selectedProfileId) || filteredProfiles[0],
+    [filteredProfiles, selectedProfileId]
+  );
+
+  const rankingProfiles = useMemo(
+    () => [...userProfiles].sort((a, b) => b.profit - a.profit || b.hitRate - a.hitRate || b.winStreak - a.winStreak).slice(0, 5),
+    [userProfiles]
+  );
+
+  const trendingUsers = useMemo(
+    () => [...userProfiles].sort((a, b) => b.followers - a.followers).slice(0, 8),
+    [userProfiles]
+  );
+
+  const toggleFollow = (profileId: string) => {
+    if (!isLoggedIn) {
+      navigate('/auth');
+      return;
+    }
+
+    setFollowedUsers((prev) => {
+      const next = new Set(prev);
+      if (next.has(profileId)) {
+        next.delete(profileId);
+      } else {
+        next.add(profileId);
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (!selectedProfileId && filteredProfiles.length > 0) {
+      setSelectedProfileId(filteredProfiles[0].id);
+      return;
+    }
+
+    if (selectedProfileId && !filteredProfiles.some((profile) => profile.id === selectedProfileId)) {
+      setSelectedProfileId(filteredProfiles[0]?.id || null);
+    }
+  }, [filteredProfiles, selectedProfileId]);
 
   const getFilteredPosts = () => {
     switch (activeTab) {
@@ -640,6 +779,137 @@ const ChatPage = () => {
           </div>
         </div>
 
+        <div className="bg-surface-card rounded-xl p-3 space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-sm font-bold flex items-center gap-2">
+              <Users size={16} className="text-primary" />
+              Comunidade de Apostas
+            </h2>
+            <span className="text-[0.65rem] font-body text-muted-foreground">{userProfiles.length} perfis</span>
+          </div>
+
+          <div className="relative">
+            <input
+              value={socialQuery}
+              onChange={(event) => setSocialQuery(event.target.value)}
+              placeholder="Buscar apostadores para seguir"
+              className="w-full bg-surface-interactive rounded-xl py-2.5 px-3 text-sm font-body text-foreground outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground min-h-[40px]"
+            />
+          </div>
+
+          {selectedProfile && (
+            <div className="bg-surface-section rounded-xl p-3 space-y-3">
+              <div className="flex items-center gap-3">
+                <img src={selectedProfile.avatar} alt={selectedProfile.name} className="w-12 h-12 rounded-full object-cover" />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-sm font-display font-bold text-foreground truncate">{selectedProfile.name}</p>
+                    {selectedProfile.verified && <CheckCircle2 size={14} className="text-primary" fill="currentColor" strokeWidth={0} />}
+                  </div>
+                  <p className="text-xs font-body text-muted-foreground">{selectedProfile.username}</p>
+                  <p className={`inline-flex mt-1 text-[0.6rem] font-display font-bold px-2 py-0.5 rounded-full ${getLevelStyle(selectedProfile.level)}`}>
+                    {selectedProfile.level}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => toggleFollow(selectedProfile.id)}
+                  className={`text-xs font-display font-bold px-3 py-2 rounded-lg min-h-[36px] ${
+                    followedUsers.has(selectedProfile.id)
+                      ? 'bg-surface-interactive text-muted-foreground'
+                      : 'bg-primary text-primary-foreground'
+                  }`}
+                >
+                  {followedUsers.has(selectedProfile.id) ? 'Seguindo' : 'Seguir'}
+                </button>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-lg bg-surface-card py-2">
+                  <p className="text-[0.6rem] font-body text-muted-foreground">Seguidores</p>
+                  <p className="text-xs font-display font-bold text-foreground">{formatNumber(selectedProfile.followers)}</p>
+                </div>
+                <div className="rounded-lg bg-surface-card py-2">
+                  <p className="text-[0.6rem] font-body text-muted-foreground">Seguindo</p>
+                  <p className="text-xs font-display font-bold text-foreground">{formatNumber(selectedProfile.following)}</p>
+                </div>
+                <div className="rounded-lg bg-surface-card py-2">
+                  <p className="text-[0.6rem] font-body text-muted-foreground">Apostas</p>
+                  <p className="text-xs font-display font-bold text-foreground">{selectedProfile.totalBets}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-lg bg-surface-card py-2">
+                  <p className="text-[0.6rem] font-body text-muted-foreground">Taxa Acerto</p>
+                  <p className="text-xs font-display font-bold text-secondary">{selectedProfile.hitRate}%</p>
+                </div>
+                <div className="rounded-lg bg-surface-card py-2">
+                  <p className="text-[0.6rem] font-body text-muted-foreground">Lucro/Prejuízo</p>
+                  <p className={`text-xs font-display font-bold ${selectedProfile.profit >= 0 ? 'text-secondary' : 'text-destructive'}`}>
+                    R$ {selectedProfile.profit.toFixed(2)}
+                  </p>
+                </div>
+                <div className="rounded-lg bg-surface-card py-2">
+                  <p className="text-[0.6rem] font-body text-muted-foreground">Sequência</p>
+                  <p className="text-xs font-display font-bold text-primary">{selectedProfile.winStreak}W</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-display font-bold text-foreground uppercase tracking-wide">Usuários em Alta</p>
+              <p className="text-[0.6rem] font-body text-muted-foreground">Top engajamento</p>
+            </div>
+            <div className="flex gap-2 overflow-x-auto no-scrollbar">
+              {trendingUsers.map((profile) => (
+                <button
+                  key={profile.id}
+                  onClick={() => setSelectedProfileId(profile.id)}
+                  className="flex-shrink-0 bg-surface-interactive rounded-xl p-2 w-[138px] text-left"
+                >
+                  <div className="flex items-center gap-2">
+                    <img src={profile.avatar} alt={profile.name} className="w-8 h-8 rounded-full object-cover" />
+                    <div className="min-w-0">
+                      <p className="text-xs font-display font-bold text-foreground truncate">{profile.name}</p>
+                      <p className="text-[0.6rem] font-body text-muted-foreground truncate">{profile.username}</p>
+                    </div>
+                  </div>
+                  <p className="text-[0.6rem] text-primary font-body mt-1.5">{formatNumber(profile.followers)} seguidores</p>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Award size={14} className="text-primary" />
+              <p className="text-xs font-display font-bold text-foreground uppercase tracking-wide">Ranking de Apostadores</p>
+            </div>
+            <div className="space-y-1.5">
+              {rankingProfiles.map((profile, index) => (
+                <button
+                  key={profile.id}
+                  onClick={() => setSelectedProfileId(profile.id)}
+                  className="w-full flex items-center gap-2 bg-surface-interactive rounded-lg px-2.5 py-2 text-left"
+                >
+                  <span className="w-6 text-center text-xs font-display font-extrabold text-primary">#{index + 1}</span>
+                  <img src={profile.avatar} alt={profile.name} className="w-7 h-7 rounded-full object-cover" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-display font-bold text-foreground truncate">{profile.name}</p>
+                    <p className="text-[0.6rem] font-body text-muted-foreground">{profile.hitRate}% acerto</p>
+                  </div>
+                  <span className={`text-xs font-display font-bold ${profile.profit >= 0 ? 'text-secondary' : 'text-destructive'}`}>
+                    R$ {profile.profit.toFixed(0)}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Tabs */}
         <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-4 px-4" style={{ WebkitOverflowScrolling: 'touch' }}>
           {tabsList.map((t) => {
@@ -755,8 +1025,8 @@ const ChatPage = () => {
               {(() => {
                 const post = allPosts.find(p => p.id === sharePost);
                 const shareText = post
-                  ? `🎯 ${post.bet.match}\n📊 ${post.bet.market} | Odd: ${post.bet.odd.toFixed(2)}${post.bet.stake ? `\n💰 Aposta: R$ ${post.bet.stake}` : ''}${post.bet.result === 'green' ? '\n✅ GREEN!' : post.bet.result === 'red' ? '\n❌ RED' : '\n⏳ Pendente'}\n\n🔥 Esportes da Sorte - Apostas Esportivas`
-                  : '🔥 Confira essa aposta na Esportes da Sorte!';
+                  ? `${post.bet.match}\n${post.bet.market} | Odd: ${post.bet.odd.toFixed(2)}${post.bet.stake ? `\nAposta: R$ ${post.bet.stake}` : ''}${post.bet.result === 'green' ? '\nResultado: GREEN' : post.bet.result === 'red' ? '\nResultado: RED' : '\nResultado: Pendente'}\n\nEsportes da Sorte - Apostas Esportivas`
+                  : 'Confira essa aposta na Esportes da Sorte!';
                 const encodedText = encodeURIComponent(shareText);
 
                 const shareActions = [

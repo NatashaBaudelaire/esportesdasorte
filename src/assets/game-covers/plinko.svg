@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Plinko cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#120723"/>
+      <stop offset="100%" stop-color="#1c1033"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1080" cy="150" r="230" fill="#a855f7" fill-opacity="0.22"/>
+  <polygon points="980,250 910,390 1005,390 955,530 1110,350 1015,350 1080,250" fill="#a855f7"/>
+  <circle cx="885" cy="430" r="10" fill="#c084fc"/>
+  <circle cx="940" cy="470" r="10" fill="#c084fc"/>
+  <circle cx="995" cy="430" r="10" fill="#c084fc"/>
+  <circle cx="1050" cy="470" r="10" fill="#c084fc"/>
+  <circle cx="1105" cy="430" r="10" fill="#c084fc"/>
+  <rect x="84" y="86" width="288" height="56" rx="28" fill="#221039" stroke="#a855f7" stroke-width="3"/>
+  <text x="116" y="123" fill="#a855f7" font-family="Verdana, Arial, sans-serif" font-size="27" font-weight="700">INSTANTANEO</text>
+  <text x="84" y="560" fill="#e5edf8" font-family="Verdana, Arial, sans-serif" font-size="92" font-weight="700">PLINKO</text>
+  <text x="84" y="626" fill="#8aa0c6" font-family="Verdana, Arial, sans-serif" font-size="34">Esportes da Sorte</text>
+</svg>

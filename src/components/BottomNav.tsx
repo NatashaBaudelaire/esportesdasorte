@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Home, Radio, Trophy, Receipt, User } from 'lucide-react';
+import { Home, Radio, Trophy, Receipt, MessageCircle } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useBetSlipStore } from '@/store/betSlipStore';
 import { cn } from '@/lib/utils';
@@ -12,6 +12,7 @@ const tabs = [
 { id: '/', icon: Home, label: 'Página ...' },
 { id: '/ao-vivo', icon: Radio, label: 'Ao vivo' },
 { id: '/esportes', icon: Trophy, label: 'Esportes' },
+{ id: '/chat', icon: MessageCircle, label: 'Social' },
 { id: 'betslip', icon: Receipt, label: 'Apostas' },
 ];
 

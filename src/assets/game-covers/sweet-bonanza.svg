@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Sweet Bonanza cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#220b2a"/>
+      <stop offset="100%" stop-color="#341039"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1090" cy="140" r="230" fill="#ec4899" fill-opacity="0.23"/>
+  <circle cx="920" cy="320" r="34" fill="#f472b6"/>
+  <circle cx="1010" cy="300" r="34" fill="#fb7185"/>
+  <circle cx="1105" cy="340" r="34" fill="#f9a8d4"/>
+  <circle cx="960" cy="410" r="34" fill="#fbcfe8"/>
+  <circle cx="1060" cy="420" r="34" fill="#f472b6"/>
+  <rect x="84" y="86" width="190" height="56" rx="28" fill="#30113b" stroke="#ec4899" stroke-width="3"/>
+  <text x="118" y="123" fill="#ec4899" font-family="Verdana, Arial, sans-serif" font-size="27" font-weight="700">SLOTS</text>
+  <text x="84" y="548" fill="#fef1f8" font-family="Verdana, Arial, sans-serif" font-size="82" font-weight="700">SWEET</text>
+  <text x="84" y="630" fill="#fef1f8" font-family="Verdana, Arial, sans-serif" font-size="82" font-weight="700">BONANZA</text>
+</svg>
