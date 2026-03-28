@@ -164,10 +164,11 @@ const cardGradients = [
 
 const PlayerPropsCarousel = () => {
   const addBet = useBetSlipStore((s) => s.addBet);
+  const carouselPlayers = playerProps.slice(0, 80);
 
   return (
     <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-1">
-      {playerProps.map((p, i) => (
+      {carouselPlayers.map((p, i) => (
         <motion.button
           key={p.id}
           whileTap={{ scale: 0.95 }}

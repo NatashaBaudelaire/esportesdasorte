@@ -150,58 +150,59 @@ export const popularMultiples = [
   },
 ];
 
-export const playerProps = [
-  {
-    id: 'pp-1',
-    player: 'Gabigol',
-    team: 'Flamengo',
-    market: 'Marcar a qualquer momento',
-    odds: 2.80,
-    photo: null,
-    number: 10,
-    position: 'CF',
-  },
-  {
-    id: 'pp-2',
-    player: 'Endrick',
-    team: 'Real Madrid',
-    market: 'Marcar gol',
-    odds: 3.50,
-    photo: null,
-    number: 9,
-    position: 'ST',
-  },
-  {
-    id: 'pp-3',
-    player: 'Raphinha',
-    team: 'Barcelona',
-    market: 'Dar assistência',
-    odds: 4.20,
-    photo: null,
-    number: 11,
-    position: 'LW',
-  },
-  {
-    id: 'pp-4',
-    player: 'Vegetti',
-    team: 'Vasco',
-    market: 'Marcar gol',
-    odds: 3.10,
-    photo: null,
-    number: 99,
-    position: 'CF',
-  },
-  {
-    id: 'pp-5',
-    player: 'Hulk',
-    team: 'Atlético-MG',
-    market: 'Chutar no gol',
-    odds: 1.85,
-    photo: null,
-    number: 7,
-    position: 'RW',
-  },
+const playerFirstNames = [
+  'Lucas', 'Joao', 'Pedro', 'Gabriel', 'Rafael', 'Mateus', 'Bruno', 'Diego', 'Felipe', 'Thiago',
+  'Andre', 'Carlos', 'Vinicius', 'Rodrigo', 'Marcos', 'Eduardo', 'William', 'Henrique', 'Nicolas', 'Arthur',
+  'Julio', 'Leandro', 'Renato', 'Caio', 'Yuri', 'Sergio', 'Daniel', 'Luan', 'Gustavo', 'Wesley',
+  'Otavio', 'Breno', 'Nathan', 'Igor', 'Alan', 'Cesar', 'Victor', 'Alex', 'Caua', 'Paulo',
 ];
+
+const playerLastNames = [
+  'Silva', 'Souza', 'Santos', 'Oliveira', 'Lima', 'Costa', 'Pereira', 'Mendes', 'Rocha', 'Ferreira',
+  'Ramos', 'Barbosa', 'Alves', 'Teixeira', 'Gomes', 'Araujo', 'Martins', 'Nascimento', 'Carvalho', 'Batista',
+  'Cardoso', 'Moreira', 'Ribeiro', 'Monteiro', 'Moura', 'Dias', 'Nogueira', 'Freitas', 'Rezende', 'Moraes',
+];
+
+const playerTeams = [
+  'Flamengo', 'Palmeiras', 'Corinthians', 'Sao Paulo', 'Fluminense', 'Botafogo', 'Santos', 'Vasco',
+  'Gremio', 'Internacional', 'Atletico-MG', 'Cruzeiro', 'Athletico-PR', 'Bahia', 'Fortaleza', 'Bragantino',
+  'Real Madrid', 'Barcelona', 'Atletico Madrid', 'Liverpool', 'Man City', 'Arsenal', 'Chelsea', 'Manchester United',
+  'Bayern Munich', 'Borussia Dortmund', 'PSG', 'Juventus', 'Inter Milan', 'Milan',
+];
+
+const playerMarkets = [
+  'Marcar a qualquer momento',
+  'Mais de 0.5 chutes no gol',
+  'Mais de 1.5 finalizacoes',
+  'Dar assistencia',
+  'Mais de 0.5 desarmes',
+  'Mais de 0.5 faltas cometidas',
+  'Mais de 1.5 passes chave',
+  'Mais de 0.5 cartoes recebidos',
+];
+
+const playerPositions = ['GK', 'CB', 'LB', 'RB', 'DM', 'CM', 'AM', 'LW', 'RW', 'ST', 'CF'];
+
+export const playerProps = Array.from({ length: 3200 }, (_, index) => {
+  const first = playerFirstNames[index % playerFirstNames.length];
+  const last = playerLastNames[Math.floor(index / playerFirstNames.length) % playerLastNames.length];
+  const team = playerTeams[index % playerTeams.length];
+  const market = playerMarkets[index % playerMarkets.length];
+  const position = playerPositions[index % playerPositions.length];
+  const number = (index % 99) + 1;
+  const odds = Number((1.6 + ((index * 37) % 520) / 100).toFixed(2));
+
+  return {
+    id: `pp-${index + 1}`,
+    player: `${first} ${last}`,
+    team,
+    market,
+    odds,
+    photo: null,
+    number,
+    position,
+  };
+});
 
 export const heroBanners = [
   {
