@@ -15,8 +15,8 @@
   "dependencies": {
     "@azure/cognitiveservices-face": "^5.0.0",
     "@capacitor/android": "^8.2.0",
-    "@capacitor/cli": "^8.2.0",
-    "@capacitor/core": "^8.2.0",
+    "@capacitor/cli": "^8.3.0",
+    "@capacitor/core": "^8.3.0",
     "@capacitor/ios": "^8.2.0",
     "@google-cloud/vision": "^5.3.5",
     "@hookform/resolvers": "^3.10.0",
@@ -111,5 +111,13 @@
   "main": "eslint.config.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NatashaBaudelaire/esportesdasorte.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NatashaBaudelaire/esportesdasorte/issues"
+  },
+  "homepage": "https://github.com/NatashaBaudelaire/esportesdasorte#readme"
 }
