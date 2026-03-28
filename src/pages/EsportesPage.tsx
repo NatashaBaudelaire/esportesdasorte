@@ -172,51 +172,24 @@ const popularEvents: Record<string, EventType[]> = {
   ],
 };
 
-const extraEventsBySport: Record<string, EventType[]> = {
-  futebol: [
-    { id: 'fx1', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Hoje, 20:00', home: 'Atlético-MG', away: 'Cruzeiro', oddsHome: 2.05, oddsDraw: 3.30, oddsAway: 3.55 },
-    { id: 'fx2', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Hoje, 18:30', home: 'Bahia', away: 'Bragantino', oddsHome: 2.30, oddsDraw: 3.15, oddsAway: 3.10 },
-    { id: 'fx3', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Amanhã, 16:00', home: 'Vasco', away: 'Fluminense', oddsHome: 2.70, oddsDraw: 3.05, oddsAway: 2.62 },
-    { id: 'fx4', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Amanhã, 19:30', home: 'Internacional', away: 'Grêmio', oddsHome: 2.45, oddsDraw: 3.10, oddsAway: 2.92 },
-    { id: 'fx5', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Qua, 21:30', home: 'Athletico-PR', away: 'Botafogo', oddsHome: 2.40, oddsDraw: 3.25, oddsAway: 2.88 },
-    { id: 'fx6', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Qui, 20:00', home: 'Juventude', away: 'Cuiabá', oddsHome: 2.15, oddsDraw: 3.00, oddsAway: 3.65 },
-    { id: 'fx7', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Sex, 19:00', home: 'Fortaleza', away: 'Corinthians', oddsHome: 2.55, oddsDraw: 3.20, oddsAway: 2.70 },
-    { id: 'fx8', sport: 'Futebol', country: 'Brasil', league: 'Brasileirão Série A', time: 'Sáb, 18:00', home: 'Palmeiras', away: 'São Paulo', oddsHome: 2.02, oddsDraw: 3.40, oddsAway: 3.75 },
-    { id: 'fx9', sport: 'Futebol', country: 'Europa', league: 'Premier League', time: 'Sáb, 12:00', home: 'Liverpool', away: 'Arsenal', oddsHome: 2.28, oddsDraw: 3.35, oddsAway: 2.95 },
-    { id: 'fx10', sport: 'Futebol', country: 'Europa', league: 'Premier League', time: 'Sáb, 14:30', home: 'Chelsea', away: 'Tottenham', oddsHome: 2.22, oddsDraw: 3.25, oddsAway: 3.22 },
-    { id: 'fx11', sport: 'Futebol', country: 'Europa', league: 'La Liga', time: 'Dom, 13:15', home: 'Sevilla', away: 'Valencia', oddsHome: 2.38, oddsDraw: 3.00, oddsAway: 3.05 },
-    { id: 'fx12', sport: 'Futebol', country: 'Europa', league: 'La Liga', time: 'Dom, 17:00', home: 'Atlético Madrid', away: 'Real Sociedad', oddsHome: 1.98, oddsDraw: 3.20, oddsAway: 4.05 },
-    { id: 'fx13', sport: 'Futebol', country: 'Europa', league: 'Serie A', time: 'Dom, 16:45', home: 'Juventus', away: 'Napoli', oddsHome: 2.20, oddsDraw: 3.10, oddsAway: 3.25 },
-    { id: 'fx14', sport: 'Futebol', country: 'Europa', league: 'Serie A', time: 'Dom, 19:30', home: 'Inter Milan', away: 'Roma', oddsHome: 1.88, oddsDraw: 3.45, oddsAway: 4.20 },
-    { id: 'fx15', sport: 'Futebol', country: 'Europa', league: 'Bundesliga', time: 'Sáb, 16:30', home: 'Bayern Munich', away: 'RB Leipzig', oddsHome: 1.72, oddsDraw: 3.90, oddsAway: 4.55 },
-    { id: 'fx16', sport: 'Futebol', country: 'Europa', league: 'Bundesliga', time: 'Sáb, 11:30', home: 'Borussia Dortmund', away: 'Leverkusen', oddsHome: 2.36, oddsDraw: 3.40, oddsAway: 2.80 },
-    { id: 'fx17', sport: 'Futebol', country: 'Europa', league: 'Ligue 1', time: 'Sex, 17:00', home: 'Marseille', away: 'Monaco', oddsHome: 2.50, oddsDraw: 3.20, oddsAway: 2.75 },
-    { id: 'fx18', sport: 'Futebol', country: 'Europa', league: 'Ligue 1', time: 'Dom, 15:00', home: 'Lyon', away: 'Lille', oddsHome: 2.45, oddsDraw: 3.10, oddsAway: 2.95 },
-  ],
-  basquete: [
-    { id: 'bkx1', sport: 'Basquete', country: 'EUA', league: 'NBA', time: 'Hoje, 23:00', home: 'Phoenix Suns', away: 'Denver Nuggets', oddsHome: 2.00, oddsDraw: 0, oddsAway: 1.87 },
-    { id: 'bkx2', sport: 'Basquete', country: 'EUA', league: 'NBA', time: 'Amanhã, 21:30', home: 'Miami Heat', away: 'New York Knicks', oddsHome: 1.95, oddsDraw: 0, oddsAway: 1.93 },
-    { id: 'bkx3', sport: 'Basquete', country: 'Brasil', league: 'NBB', time: 'Amanhã, 20:00', home: 'Bauru', away: 'Paulistano', oddsHome: 1.88, oddsDraw: 0, oddsAway: 1.96 },
-  ],
-  tenis: [
-    { id: 'tnx1', sport: 'Tênis', country: 'Internacional', league: 'ATP 250 Estoril', time: 'Hoje, 12:30', home: 'Casper Ruud', away: 'Hubert Hurkacz', oddsHome: 1.82, oddsDraw: 0, oddsAway: 2.02 },
-    { id: 'tnx2', sport: 'Tênis', country: 'Internacional', league: 'WTA Stuttgart', time: 'Amanhã, 15:00', home: 'Coco Gauff', away: 'Elena Rybakina', oddsHome: 2.05, oddsDraw: 0, oddsAway: 1.78 },
-  ],
-  cs2: [
-    { id: 'csx1', sport: 'CS2', country: 'Internacional', league: 'ESL Pro League', time: 'Hoje, 17:00', home: 'MOUZ', away: 'Cloud9', oddsHome: 1.92, oddsDraw: 0, oddsAway: 1.92 },
-    { id: 'csx2', sport: 'CS2', country: 'Internacional', league: 'IEM Katowice', time: 'Amanhã, 16:00', home: 'Team Spirit', away: 'Astralis', oddsHome: 1.78, oddsDraw: 0, oddsAway: 2.12 },
-  ],
-  lol: [
-    { id: 'lolx1', sport: 'LoL', country: 'Internacional', league: 'LEC', time: 'Hoje, 13:00', home: 'G2 Esports', away: 'Fnatic', oddsHome: 1.70, oddsDraw: 0, oddsAway: 2.15 },
-    { id: 'lolx2', sport: 'LoL', country: 'Internacional', league: 'LPL', time: 'Amanhã, 09:00', home: 'JDG', away: 'Top Esports', oddsHome: 1.83, oddsDraw: 0, oddsAway: 1.98 },
-  ],
-};
-
 const bettingTips = [
   { id: 'tip1', time: 'Hoje, 14:45', home: 'Sport', away: 'Náutico', league: 'Série B', tip: 'Sport vence', odds: 1.85 },
   { id: 'tip2', time: 'Hoje, 16:00', home: 'Flamengo', away: 'Palmeiras', league: 'Brasileirão', tip: 'Ambos marcam', odds: 1.72 },
   { id: 'tip3', time: 'Hoje, 19:00', home: 'Vasco', away: 'Botafogo', league: 'Brasileirão', tip: '+2.5 gols', odds: 2.05 },
   { id: 'tip4', time: 'Amanhã, 16:00', home: 'Barcelona', away: 'Real Madrid', league: 'La Liga', tip: 'Barcelona vence', odds: 2.30 },
+];
+
+const competitionsList = [
+  { id: 'c1', name: 'Brasileirão Série A', country: 'Brasil', flag: 'https://flagcdn.com/w40/br.png', matches: 38 },
+  { id: 'c2', name: 'Copa do Brasil', country: 'Brasil', flag: 'https://flagcdn.com/w40/br.png', matches: 8 },
+  { id: 'c3', name: 'Libertadores', country: 'América do Sul', flag: 'https://flagcdn.com/w40/br.png', matches: 12 },
+  { id: 'c4', name: 'Champions League', country: 'Europa', flag: 'https://flagcdn.com/w40/eu.png', matches: 16 },
+  { id: 'c5', name: 'Premier League', country: 'Inglaterra', flag: 'https://flagcdn.com/w40/gb-eng.png', matches: 24 },
+  { id: 'c6', name: 'La Liga', country: 'Espanha', flag: 'https://flagcdn.com/w40/es.png', matches: 18 },
+  { id: 'c7', name: 'Serie A', country: 'Itália', flag: 'https://flagcdn.com/w40/it.png', matches: 15 },
+  { id: 'c8', name: 'Bundesliga', country: 'Alemanha', flag: 'https://flagcdn.com/w40/de.png', matches: 14 },
+  { id: 'c9', name: 'Ligue 1', country: 'França', flag: 'https://flagcdn.com/w40/fr.png', matches: 12 },
+  { id: 'c10', name: 'Eliminatórias', country: 'CONMEBOL', flag: 'https://flagcdn.com/w40/br.png', matches: 4 },
 ];
 
 type Tab = 'social' | 'calendario' | 'competicoes';
@@ -256,39 +229,10 @@ const EsportesPage = () => {
   const [selectedLeague, setSelectedLeague] = useState<string | null>(null);
   const addBet = useBetSlipStore((s) => s.addBet);
 
-  const allEvents = [
-    ...(popularEvents[selectedSport.id] || []),
-    ...(extraEventsBySport[selectedSport.id] || []),
-  ];
+  const allEvents = popularEvents[selectedSport.id] || [];
   const events = selectedLeague
     ? allEvents.filter((ev) => ev.league === selectedLeague)
     : allEvents;
-
-  const competitionsList = Object.values(
-    allEvents.reduce((acc, ev) => {
-      if (!acc[ev.league]) {
-        acc[ev.league] = {
-          id: `comp-${ev.league.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
-          name: ev.league,
-          country: ev.country,
-          matches: 0,
-          teams: new Set<string>(),
-        };
-      }
-
-      acc[ev.league].matches += 1;
-      acc[ev.league].teams.add(ev.home);
-      acc[ev.league].teams.add(ev.away);
-
-      return acc;
-    }, {} as Record<string, { id: string; name: string; country: string; matches: number; teams: Set<string> }>),
-  )
-    .map((comp) => ({
-      ...comp,
-      teamsCount: comp.teams.size,
-      previewTeams: Array.from(comp.teams).slice(0, 3),
-    }))
-    .sort((a, b) => b.matches - a.matches || b.teamsCount - a.teamsCount);
 
   useEffect(() => {
     if (activeTab !== 'social') return;
@@ -723,13 +667,6 @@ const EsportesPage = () => {
         {/* COMPETIÇÕES TAB */}
         {activeTab === 'competicoes' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2 mt-2">
-            {competitionsList.length === 0 && (
-              <div className="rounded-xl bg-surface-card p-4 text-center">
-                <p className="text-sm font-display font-bold text-foreground">Sem competições para este esporte agora</p>
-                <p className="text-xs font-body text-muted-foreground mt-1">Troque o esporte para ver outras ligas e times.</p>
-              </div>
-            )}
-
             {competitionsList.map((comp) => (
               <motion.button
                 key={comp.id}
@@ -740,13 +677,10 @@ const EsportesPage = () => {
                 }}
                 className="w-full flex items-center gap-3 bg-surface-card rounded-xl px-4 py-3.5 min-h-[52px] hover:bg-surface-interactive transition-colors"
               >
-                <div className="w-8 h-8 rounded-lg bg-primary/15 text-primary flex items-center justify-center text-[0.65rem] font-display font-bold">
-                  {comp.teamsCount}
-                </div>
+                <img src={comp.flag} alt={comp.country} className="w-6 h-4 rounded-sm object-cover" />
                 <div className="flex-1 text-left">
                   <p className="text-sm font-display font-bold text-foreground">{comp.name}</p>
-                  <p className="text-[0.6rem] font-body text-muted-foreground">{comp.country} · {comp.matches} jogos · {comp.teamsCount} times</p>
-                  <p className="text-[0.55rem] font-body text-muted-foreground/80 truncate mt-0.5">{comp.previewTeams.join(' · ')}</p>
+                  <p className="text-[0.6rem] font-body text-muted-foreground">{comp.country} · {comp.matches} jogos</p>
                 </div>
                 <ChevronRight size={16} className="text-muted-foreground" />
               </motion.button>
